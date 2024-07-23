@@ -14,7 +14,7 @@ New-Item -ItemType Directory c:\mpdownload
 # Install Az Module
 Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module -Name Az -Force -Scope CurrentUser
-Install-Module Az.Storage -Force
+Install-Module Az.Storage,Az.KeyVault -Force
 
 #Getting Artifacts
 Clear-AzContext -force
@@ -32,7 +32,7 @@ Install-WindowsFeature -Name Web-Server,NET-WCF-HTTP-Activation45 -IncludeManage
 #Set-ItemProperty IIS:\AppPools\DefaultAppPool\ managedRuntimeVersion ""
 Import-Module WebAdministration
 New-Item 'IIS:\Sites\Default Web Site\mpdownload' -type Application -physicalPath c:\mpdownload
-$desiredThumbprint=(Get-AzKeyVaultCertificate -VaultName "scoc-kv" -Name "test").Thumbprint
+$desiredThumbprint=(Get-AzKeyVaultCertificate -VaultName "sathish-vault" -Name "ocs-cert").Thumbprint
 New-IISSiteBinding -Name "Default Web Site" -BindingInformation "*:443:" -CertificateThumbPrint `$desiredThumbprint -CertStoreLocation My -Protocol https
  
 Restart-Service W3SVC
