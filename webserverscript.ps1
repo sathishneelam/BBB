@@ -32,6 +32,8 @@ Install-WindowsFeature -Name Web-Server,NET-WCF-HTTP-Activation45 -IncludeManage
 #Set-ItemProperty IIS:\AppPools\DefaultAppPool\ managedRuntimeVersion ""
 Import-Module WebAdministration
 New-Item 'IIS:\Sites\Default Web Site\mpdownload' -type Application -physicalPath c:\mpdownload
+Clear-AzContext -force
+Connect-AzAccount -identity
 $desiredThumbprint=(Get-AzKeyVaultCertificate -VaultName "sathish-vault" -Name "ocs-cert").Thumbprint
 New-IISSiteBinding -Name "Default Web Site" -BindingInformation "*:443:" -CertificateThumbPrint `$desiredThumbprint -CertStoreLocation My -Protocol https
  
