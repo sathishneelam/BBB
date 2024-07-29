@@ -1,6 +1,6 @@
 $containerName = "artifacts"
 $blobName = "BuildPackage.zip"
-$storageAccountName = "sathishstoragecli"
+$storageAccountName = "onlinecatalogappsa"
 $outputFolder = "C:\temp\BuildPackage.zip"
 
 # Force use of TLS 1.2
