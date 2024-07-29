@@ -34,7 +34,7 @@ Import-Module WebAdministration
 New-Item 'IIS:\Sites\Default Web Site\mpdownload' -type Application -physicalPath c:\mpdownload
 Clear-AzContext -force
 Connect-AzAccount -identity
-$desiredThumbprint=(Get-AzKeyVaultCertificate -VaultName "sathish-vault" -Name "ocs-cert").Thumbprint
+$desiredThumbprint=(Get-AzKeyVaultCertificate -VaultName "SCOMOCDevKeyVault" -Name "test-cert").Thumbprint
 New-IISSiteBinding -Name "Default Web Site" -BindingInformation "*:443:" -CertificateThumbPrint $desiredThumbprint -CertStoreLocation My -Protocol https
  
 Restart-Service W3SVC
