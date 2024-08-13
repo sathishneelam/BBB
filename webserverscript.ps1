@@ -3,8 +3,8 @@ $blobName = "BuildPackage.zip"
 $storageAccountName = "onlinecatalogappsa"
 $outputFolder = "C:\temp\BuildPackage.zip"
 
-# Force use of TLS 1.2
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+# Force use of TLS 1.2 and TLS 1.3
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor [Net.SecurityProtocolType]::Tls13
 # Firewall
 netsh advfirewall firewall add rule name="http" dir=in action=allow protocol=TCP localport=80
 # Folders
@@ -12,7 +12,7 @@ netsh advfirewall firewall add rule name="http" dir=in action=allow protocol=TCP
 New-Item -ItemType Directory c:\mpdownload
 
 # Install Az Module
-Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+Install-PackageProvider -Name NuGet -Force
 Install-Module -Name Az -Force -Scope CurrentUser
 Install-Module Az.Storage,Az.KeyVault -Force
 
